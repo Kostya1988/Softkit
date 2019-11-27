@@ -11,10 +11,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
+@Slf4j
 @Component
 public class LogikGetInfoSpecificCompany{
 
@@ -23,6 +26,7 @@ public class LogikGetInfoSpecificCompany{
 
     public List<AllInfoSpecificCompany> infoSpecificCompanies(String company)  throws IOException {
     RestTemplate restTemplate = new RestTemplate();
+    log.info("Name of the company ", company);
     ResponseEntity<String> response
             = restTemplate.getForEntity("https://sandbox.iexapis.com/stable/stock/" + company.toUpperCase() + "/quote?token=Tpk_ee567917a6b640bb8602834c9d30e571", String.class);
         if (response.getStatusCode() != HttpStatus.OK) {
